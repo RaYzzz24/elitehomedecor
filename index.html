@@ -44,6 +44,10 @@
             position: relative;
             background-color: #f3f4f6;
             border-radius: 0.5rem;
+            cursor: grab; /* Added for interaction hint */
+        }
+        .scroller-viewport:active {
+            cursor: grabbing; /* Added for interaction hint */
         }
         .scroller-gallery {
             height: 100%;
@@ -152,10 +156,14 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
+        .product-grid-card:hover img { /* <-- ADDED THIS BLOCK */
+            transform: scale(1.05);
+        }
         .product-grid-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            transition: transform 0.3s ease; /* <-- ADDED THIS LINE */
         }
         .product-grid-card-name {
             font-family: 'Montserrat', sans-serif;
@@ -164,6 +172,39 @@
             padding: 1rem;
             text-align: center;
         }
+
+        /* --- NEW Seating Card Style --- */
+        .seating-product-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e5e7eb; /* Add a subtle border */
+        }
+        .seating-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .seating-product-card:hover img { /* <-- ADDED THIS BLOCK */
+            transform: scale(1.05);
+        }
+        .seating-product-card img {
+            width: 100%;
+            height: 280px; /* Taller image */
+            object-fit: cover; /* Keep cover, but taller */
+            transition: transform 0.3s ease; /* <-- ADDED THIS LINE */
+        }
+        .seating-product-card-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #1f2937;
+            padding: 1rem;
+            text-align: center;
+        }
+        /* --- End of NEW Seating Card Style --- */
+
         .feature-card-img {
             width: 100%;
             height: 180px;
@@ -294,10 +335,39 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
-    .page {
-        /* This animation will run every time a page is shown */
+    /* --- NEW ANIMATIONS --- */
+    @keyframes pageSlideInFromRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pageSlideInFromLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pageZoomIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes pageFadeUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-page-fade-in {
         animation: pageFadeIn 0.4s ease-out;
     }
+    .animate-page-slide-right {
+        animation: pageSlideInFromRight 0.5s ease-out;
+    }
+    .animate-page-slide-left {
+        animation: pageSlideInFromLeft 0.5s ease-out;
+    }
+    .animate-page-zoom-in {
+        animation: pageZoomIn 0.4s ease-out;
+    }
+    .animate-page-fade-up {
+        animation: pageFadeUp 0.5s ease-out;
+    }
+    /* --- End of NEW Animations --- */
 
     /* Class for elements to animate on scroll */
     .animate-on-scroll {
@@ -353,7 +423,7 @@
         </div>
     </header>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-black/60 z-50 hidden">
+    <div id="mobile-menu" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0" style="transition: opacity 0.3s ease-in-out;">
         <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-8">
@@ -375,12 +445,9 @@
         </div>
     </div>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0" style="transition: opacity 0.3s ease-in-out;">
-        <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-8">
+    <!-- This "main" tag is now correctly placed *after* the header and mobile menu sections -->
     <main>
-        <section id="page-hero" class="relative min-h-[300px] bg-cover bg-center flex items-center justify-center text-white hidden" style="background-image: url('images/https://images.unsplash.com/photo-1533757875211-3715b0f92614?q=80&w=2070&auto=format&fit=crop');">
+        <section id="page-hero" class="relative min-h-[300px] bg-cover bg-center flex items-center justify-center text-white hidden" style="background-image: url('https://images.unsplash.com/photo-1533757875211-3715b0f92614?q=80&w=2070&auto=format&fit=crop');">
             <div class="absolute inset-0 bg-black opacity-60"></div>
             <div class="relative z-10 text-center p-6">
                 <h1 id="page-hero-title" class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Cormorant Garamond', serif;"></h1>
@@ -577,6 +644,10 @@
                                    </button>
                                </div>
                                <div class="scroller-pagination flex justify-center space-x-2 mt-4"></div>
+                               <!-- NEW Details Section -->
+                               <div class="text-center text-gray-600 mt-6 max-w-xl mx-auto">
+                                   <p>We have all door and window curtains, in all 7, 8, and 10 feet sizes, with your choice of fabric.</p>
+                               </div>
                            </div>
                        </div>
                        <div>
@@ -603,6 +674,10 @@
                                    </button>
                                </div>
                                <div class="scroller-pagination flex justify-center space-x-2 mt-4"></div>
+                               <!-- NEW Details Section -->
+                               <div class="text-center text-gray-600 mt-6 max-w-xl mx-auto">
+                                   <p>We have all door and window curtains, in all 7, 8, and 10 feet sizes, with your choice of fabric.</p>
+                               </div>
                            </div>
                        </div>
                  </div>
@@ -640,13 +715,13 @@
 
                     <div class="my-16">
                         <div class="text-center mb-12">
-                           <h2 class="text-4xl text-black">Find Your Comfort Zone</h2>
-                           <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Let us know what you're looking for, and we'll help you find the perfect bedding.</p>
+                           <h3 class="text-3xl text-black">Mattresses & Pillows</h3>
+                           <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Find the perfect mattresses and pillows for ultimate comfort.</p>
                        </div>
-                       <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100 contact-form-wrapper">
-                           <div class="space-y-5">
-                               <div>
-                                   <label for="name-bedding" class="block text-gray-800 font-semibold mb-2">Name:</label>
+                       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                            <div class="product-grid-card">
+                                <img src="images/ortho.jpg" alt="Orthopedic Mattress" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Mattress+1';">
+                                <h4 class="product-grid-card-name">Orthopedic Mattress</h4>
                             </div>
                             <div class="product-grid-card">
                                 <img src="images/mem.jpg" alt="Memory Foam Mattress" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Mattress+2';">
@@ -727,37 +802,37 @@
                             <p class="text-gray-600 mt-4 max-w-2xl mx-auto">From beanbags to chairs, find your new favorite spot.</p>
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                            <div class="product-grid-card">
-                                <img src="images/stool.jpg" alt="Upholstered Stool" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Stool+1';">
-                                <h4 class="product-grid-card-name">Upholstered Stool</h4>
+                            <div class="seating-product-card">
+                                <img src="images/stool.jpg" alt="Upholstered Stool" onerror="this.onerror=null;this.src='https://placehold.co/300x280/f3f4f6/DC2626?text=Stool+1';">
+                                <h4 class="seating-product-card-name">Upholstered Stool</h4>
                             </div>
-                            <div class="product-grid-card">
-                                <img src="images/modern.jpg" alt="Modern Sofa" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Sofa+1';">
-                                <h4 class="product-grid-card-name">Modern Sofa</h4>
+                            <div class="seating-product-card">
+                                <img src="images/modern.jpg" alt="Modern Sofa" onerror="this.onerror=null;this.src='https://placehold.co/300x280/f3f4f6/DC2626?text=Sofa+1';">
+                                <h4 class="seating-product-card-name">Modern Sofa</h4>
                             </div>
-                            <div class="product-grid-card">
-                                <img src="images/lshape.jpg" alt="L-Shape Sofa" onerror="this.onerror=null;this.src='httpsSs://placehold.co/300x200/f3f4f6/DC2626?text=Sofa+2';">
-                                <h4 class="product-grid-card-name">L-Shape Sofa</h4>
+                            <div class="seating-product-card">
+                                <img src="images/lshape.jpg" alt="L-Shape Sofa" onerror="this.onerror=null;this.src='httpsSs://placehold.co/300x280/f3f4f6/DC2626?text=Sofa+2';">
+                                <h4 class="seating-product-card-name">L-Shape Sofa</h4>
                             </div>
-                            <div class="product-grid-card">
-                                <img src="images/compact.jpg" alt="Compact Sofa" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Sofa+3';">
-                                <h4 class="product-grid-card-name">Compact Sofa</h4>
+                            <div class="seating-product-card">
+                                <img src="images/compact.jpg" alt="Compact Sofa" onerror="this.onerror=null;this.src='https://placehold.co/300x280/f3f4f6/DC2626?text=Sofa+3';">
+                                <h4 class="seating-product-card-name">Compact Sofa</h4>
                             </div>
-                            <div class="product-grid-card">
-                                <img src="images/recliner.jpg" alt="Recliner Sofa" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Sofa+4';">
-                                <h4 class="product-grid-card-name">Recliner Sofa</h4>
+                            <div class="seating-product-card">
+                                <img src="images/recliner.jpg" alt="Recliner Sofa" onerror="this.onerror=null;this.src='https://placehold.co/300x280/f3f4f6/DC2626?text=Sofa+4';">
+                                <h4 class="seating-product-card-name">Recliner Sofa</h4>
                             </div>
-                            <div class="product-grid-card">
-                                <img src="images/bean.jpg" alt="Bean Bags" onerror="this.onerror=null;this.src='httpsMs://placehold.co/300x200/f3f4f6/DC2626?text=Bean+Bag';">
-                                <h4 class="product-grid-card-name">Bean Bags</h4>
+                            <div class="seating-product-card">
+                                <img src="images/bean.jpg" alt="Bean Bags" onerror="this.onerror=null;this.src='httpsMs://placehold.co/300x280/f3f4f6/DC2626?text=Bean+Bag';">
+                                <h4 class="seating-product-card-name">Bean Bags</h4>
                             </div>
-                            <div class="product-grid-card">
-                                <img src="images/swing.jpg" alt="Indoor Swing" onerror="this.onerror=null;this.src='httpsSs://placehold.co/300x200/f3f4f6/DC2626?text=Indoor+Swing';">
-                                <h4 class="product-grid-card-name">Indoor Swing</h4>
+                            <div class="seating-product-card">
+                                <img src="images/swing.jpg" alt="Indoor Swing" onerror="this.onerror=null;this.src='httpsSs://placehold.co/300x280/f3f4f6/DC2626?text=Indoor+Swing';">
+                                <h4 class="seating-product-card-name">Indoor Swing</h4>
                             </div>
-                            <div class="product-grid-card">
-                                <img src="images/foam.png" alt="Beanbag Foam" onerror="this.onerror=null;this.src='httpsMs://placehold.co/300x200/f3f4f6/DC2626?text=Beanbag+Foam';">
-                                <h4 class="product-grid-card-name">Beanbag Foam</h4>
+                            <div class="seating-product-card">
+                                <img src="images/foam.png" alt="Beanbag Foam" onerror="this.onerror=null;this.src='httpsMs://placehold.co/300x280/f3f4f6/DC2626?text=Beanbag+Foam';">
+                                <h4 class="seating-product-card-name">Beanbag Foam</h4>
                             </div>
                         </div>
                     </div>
@@ -786,13 +861,13 @@
                     <section class="py-20 bg-white">
                         <div class="container mx-auto px-6 max-w-3xl">
                             <div class="text-center mb-12">
-                                <h2 class="text-4xl text-black">Interested in Our Seating?</h2>
-                                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Let us know what you're looking for, and we'll help you find the perfect piece.</p>
+                                <h2 class="text-4xl text-black">Find Your Comfort Zone</h2>
+                                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Let us know what you're looking for, and we'll help you find the perfect bedding.</p>
                             </div>
-                            <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100 contact-form-wrapper">
+                            <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100">
                                 <div class="space-y-5">
                                     <div>
-                                        <label for="name-seating" class="block text-gray-800 font-semibold mb-2">Name:</label>
+                                        <label for="name-bedding" class="block text-gray-800 font-semibold mb-2">Name:</label>
                                         <input type="text" id="name-seating" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition">
                                     </div>
                                     <div>
@@ -920,7 +995,32 @@
                 const cleanPageId = pageId.startsWith('#') ? pageId.substring(1) : pageId;
 
                 pages.forEach(page => {
-                    page.classList.toggle('hidden', page.id !== cleanPageId);
+                    // Remove all potential animation classes first
+                    page.classList.remove('animate-page-fade-in', 'animate-page-slide-right', 'animate-page-slide-left', 'animate-page-zoom-in');
+
+                    if (page.id !== cleanPageId) {
+                        page.classList.add('hidden');
+                    } else {
+                        // This is the page we want to show
+                        page.classList.remove('hidden');
+
+                        // Force browser reflow to re-trigger animation
+                        void page.offsetWidth; 
+
+                        // Add the *specific* animation based on page ID
+                        if (cleanPageId === 'home-page') {
+                            page.classList.add('animate-page-fade-in');
+                        } else if (cleanPageId === 'curtains-page') {
+                            page.classList.add('animate-page-slide-right');
+                        } else if (cleanPageId === 'bedding-page') {
+                            page.classList.add('animate-page-slide-left');
+                        } else if (cleanPageId === 'seating-page') {
+                            page.classList.add('animate-page-zoom-in');
+                        } else {
+                            // Fallback for any other page
+                            page.classList.add('animate-page-fade-in');
+                        }
+                    }
                 });
                 
                 if (cleanPageId !== 'home-page' || !document.getElementById('locate-us')) {
@@ -934,6 +1034,12 @@
                     pageHeroTitle.textContent = data.title;
                     pageHeroSubtitle.textContent = data.subtitle;
                     pageHero.style.backgroundImage = `url('images/${data.imageUrl}')`;
+                    
+                    // Animate the hero section as well
+                    pageHero.classList.remove('animate-page-fade-up');
+                    void pageHero.offsetWidth; // Re-trigger reflow
+                    pageHero.classList.add('animate-page-fade-up');
+                    
                     pageHero.classList.remove('hidden');
                 } else {
                     if(pageHero) pageHero.classList.add('hidden');
@@ -1061,16 +1167,40 @@
 
             function initializeScroller(wrapper) {
                 const gallery = wrapper.querySelector('.scroller-gallery');
+                const viewport = wrapper.querySelector('.scroller-viewport'); /* Added viewport selector */
                 const prevBtn = wrapper.querySelector('.scroller-btn-prev');
                 const nextBtn = wrapper.querySelector('.scroller-btn-next');
                 const paginationContainer = wrapper.querySelector('.scroller-pagination');
 
-                if (!gallery) return;
+                if (!gallery || !viewport) return; /* Updated check */
 
                 const images = gallery.querySelectorAll('img');
                 const totalImages = images.length;
                 let currentIndex = 0;
                 let paginationDots = [];
+
+                // --- NEW Swipe Logic ---
+                let startX = 0;
+                let isSwiping = false;
+
+                viewport.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isSwiping = true;
+                }, { passive: true });
+
+                viewport.addEventListener('touchend', (e) => {
+                    if (!isSwiping) return;
+                    isSwiping = false;
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = endX - startX;
+
+                    if (diffX < -40) { // Swiped left (threshold 40px)
+                        goToSlide(currentIndex + 1);
+                    } else if (diffX > 40) { // Swiped right (threshold 40px)
+                        goToSlide(currentIndex - 1);
+                    }
+                });
+                // --- End NEW Swipe Logic ---
 
                 if (totalImages <= 1) {
                     if (prevBtn) prevBtn.style.display = 'none';
@@ -1117,7 +1247,7 @@
             const lightboxImage = document.getElementById('lightbox-image');
             const lightboxClose = document.getElementById('image-lightbox-close');
 
-            document.querySelectorAll('.product-grid-card').forEach(card => {
+            document.querySelectorAll('.product-grid-card, .seating-product-card').forEach(card => { /* <-- MODIFIED THIS LINE */
                 card.addEventListener('click', () => {
                     const imgElement = card.querySelector('img');
                     if (imgElement && lightboxOverlay && lightboxImage) {
