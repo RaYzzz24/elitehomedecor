@@ -260,10 +260,65 @@
          #image-lightbox-close:hover {
             transform: scale(1.1);
          }
+    
+    /* --- Preloader / Buffer --- */
+    #preloader {
+        position: fixed;
+        inset: 0;
+        background-color: white;
+        z-index: 10000; /* Highest z-index */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+    #preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f4f6; /* Light gray */
+        border-top: 5px solid #DC2626; /* Red */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* --- Page & Scroll Animations --- */
+    @keyframes pageFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .page {
+        /* This animation will run every time a page is shown */
+        animation: pageFadeIn 0.4s ease-out;
+    }
+
+    /* Class for elements to animate on scroll */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        transition-delay: 0.1s;
+    }
+    .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
     </style>
 </head>
 <body class="text-gray-800">
     <!-- IMAGE PATHS: All image 'src' and 'url()' paths assume they are inside a folder named 'images/' -->
+
+    <!-- Preloader / Buffer -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
     <header class="bg-white sticky top-0 z-40">
         <div class="menu-container">
@@ -320,6 +375,10 @@
         </div>
     </div>
 
+    <div id="mobile-menu" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0" style="transition: opacity 0.3s ease-in-out;">
+        <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-8">
     <main>
         <section id="page-hero" class="relative min-h-[300px] bg-cover bg-center flex items-center justify-center text-white hidden" style="background-image: url('images/https://images.unsplash.com/photo-1533757875211-3715b0f92614?q=80&w=2070&auto=format&fit=crop');">
             <div class="absolute inset-0 bg-black opacity-60"></div>
@@ -351,7 +410,7 @@
                             <div class="feature-card">
                                 <img src="images/cur.jpg" alt="Custom Curtains" class="feature-card-img" onerror="this.onerror=null;this.src='https://placehold.co/300x180/f3f4f6/DC2626?text=Curtains';">
                                 <div class="p-6 text-center">
-                                    <h3 class="text-2xl text-red-600 font-bold mb-2">Custom Curtains</h3>
+                                    <h3 class="text-2xl text-red-600 font-bold mb-2">Customized Curtains</h3>
                                     <p class="text-gray-600">Tailor-made curtains to perfectly fit your windows and style. Our specialty!</p>
                                 </div>
                             </div>
@@ -369,7 +428,7 @@
                             <div class="feature-card">
                                  <img src="images/sofa.jpg" alt="Beanbags & Seating" class="feature-card-img" onerror="this.onerror=null;this.src='https://placehold.co/300x180/f3f4f6/DC2626?text=Seating';">
                                  <div class="p-6 text-center">
-                                    <h3 class="text-2xl text-red-600 font-bold mb-2">Beanbags & Seating</h3>
+                                    <h3 class="text-2xl text-red-600 font-bold mb-2">Sofas & Beanbags</h3>
                                     <p class="text-gray-600">Stylish and comfortable beanbags and other seating solutions.</p>
                                  </div>
                             </div>
@@ -394,21 +453,21 @@
                         <p class="text-gray-600 mt-4 max-w-3xl mx-auto">We are committed to providing you with not just products, but a complete home solution.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 text-center">
-                        <div class="p-4 md:p-6">
+                        <div class="p-4 md:p-6 why-choose-item">
                             <div class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16 mx-auto mb-4 rounded-full bg-red-100 text-red-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
                             </div>
                             <h3 class="text-xl md:text-2xl text-black mb-2">Premium Quality</h3>
                             <p class="text-gray-600">We use only the finest materials to ensure durability and a luxurious feel for all our products.</p>
                         </div>
-                        <div class="p-4 md:p-6">
+                        <div class="p-4 md:p-6 why-choose-item">
                             <div class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16 mx-auto mb-4 rounded-full bg-red-100 text-red-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A8.003 8.003 0 0117.657 18.657z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1014.12 11.88l-4.242 4.242z" /></svg>
                             </div>
-                            <h3 class="text-xl md:text-2xl text-black mb-2">Custom Tailoring</h3>
+                            <h3 class="text-xl md:text-2xl text-black mb-2">Customized Tailoring</h3>
                             <p class="text-gray-600">Our specialty is creating custom-fit curtains that perfectly match your vision and your space.</p>
                         </div>
-                        <div class="p-4 md:p-6">
+                        <div class="p-4 md:p-6 why-choose-item">
                             <div class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16 mx-auto mb-4 rounded-full bg-red-100 text-red-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             </div>
@@ -425,7 +484,7 @@
                            <h2 class="text-4xl text-black">Enhance Your Home</h2>
                            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Reach out for custom orders, measurements, or any inquiries you may have.</p>
                        </div>
-                       <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100">
+                       <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100 contact-form-wrapper">
                            <div class="space-y-5">
                                <div>
                                    <label for="name-home" class="block text-gray-800 font-semibold mb-2">Name:</label>
@@ -477,10 +536,10 @@
                            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Visit us in person to see our full collection and get expert advice.</p>
                        </div>
                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                           <div class="w-full h-96 rounded-lg shadow-2xl overflow-hidden">
+                           <div class="w-full h-96 rounded-lg shadow-2xl overflow-hidden map-container">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242.92594369721618!2d77.6008888994522!3d13.04743849598338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17fbef42c187%3A0x4b7f096e1fd9d282!2sElite%20Home%20Decor!5e0!3m2!1sen!2sin!4v1761833374447!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                            </div>
-                           <div class="text-center md:text-left">
+                           <div class="text-center md:text-left map-text">
                                <h3 class="text-3xl text-black mb-4">Visit Us</h3>
                                <p class="text-lg text-gray-700 mb-2"><strong>Address: </strong> #38, Anjeneya Temple Street , Kempapura, Bengaluru - 560024</p>
                                <p class="text-lg text-gray-700"><strong>Hours:</strong> Mon - Sun, 10:00 AM - 9:00 PM  (Friday close)</p>
@@ -509,7 +568,7 @@
                                            <div class="scroller-gallery">
                                                <img src="images/one.jpg?q=80&w=1887&auto=format&fit=crop" alt="Main Curtain 1" onerror="this.onerror=null;this.src='https://placehold.co/800x600/cccccc/FFFFFF?text=Curtain+1';">
                                                <img src="images/sum1.jpg?q=80&w=1887&auto=format&fit=crop" alt="Main Curtain 2" onerror="this.onerror=null;this.src='https://placehold.co/800x600/cccccc/FFFFFF?text=Curtain+2';">
-                                               <img src="images/https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=2070&auto=format&fit=crop" alt="Main Curtain 3">
+                                               <img src="images/main1.jpg?q=80&w=1887&auto=format&fit=crop" alt="Main Curtain 3">
                                            </div>
                                        </div>
                                    </div>
@@ -535,7 +594,7 @@
                                            <div class="scroller-gallery">
                                                <img src="images/two.jpg?q=80&w=1887&auto=format&fit=crop" alt="Share Curtain 1" onerror="this.onerror=null;this.src='https://placehold.co/800x600/cccccc/FFFFFF?text=Sheer+Curtain+1';">
                                                <img src="images/win1.jpg?q=80&w=1887&auto=format&fit=crop" alt="Share Curtain 2" onerror="this.onerror=null;this.src='https://placehold.co/800x600/cccccc/FFFFFF?text=Sheer+Curtain+2';">
-                                               <img src="images/https://images.unsplash.com/photo-1615875605825-5eb9bb5c3dec?q=80&w=1974&auto=format&fit=crop" alt="Share Curtain 3">
+                                               <img src="images/sheer3.jpg?q=80&w=1887&auto=format&fit=crop" alt="Share Curtain 3">
                                            </div>
                                        </div>
                                    </div>
@@ -554,7 +613,7 @@
                            <h2 class="text-4xl text-black">Ready for New Curtains?</h2>
                            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Reach out for custom orders, measurements, or any inquiries you may have.</p>
                        </div>
-                       <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100">
+                       <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100 contact-form-wrapper">
                            <div class="space-y-5">
                                <div>
                                    <label for="name-curtains" class="block text-gray-800 font-semibold mb-2">Name:</label>
@@ -581,13 +640,13 @@
 
                     <div class="my-16">
                         <div class="text-center mb-12">
-                            <h3 class="text-3xl text-black">Mattresses & Pillows</h3>
-                            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Comfort and support for a perfect night's sleep.</p>
-                        </div>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                            <div class="product-grid-card">
-                                <img src="images/orth.jpg" alt="Orthopedic Mattress" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Mattress+1';">
-                                <h4 class="product-grid-card-name">Orthopedic Mattress</h4>
+                           <h2 class="text-4xl text-black">Find Your Comfort Zone</h2>
+                           <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Let us know what you're looking for, and we'll help you find the perfect bedding.</p>
+                       </div>
+                       <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100 contact-form-wrapper">
+                           <div class="space-y-5">
+                               <div>
+                                   <label for="name-bedding" class="block text-gray-800 font-semibold mb-2">Name:</label>
                             </div>
                             <div class="product-grid-card">
                                 <img src="images/mem.jpg" alt="Memory Foam Mattress" onerror="this.onerror=null;this.src='https://placehold.co/300x200/f3f4f6/DC2626?text=Mattress+2';">
@@ -659,7 +718,7 @@
         </div>
 
         <div id="seating-page" class="page hidden">
-            <section class="py-20 bg-white"> 
+            <section class="py-20 bg-gray-50"> 
                 <div class="container mx-auto px-6">
 
                     <div class="my-16">
@@ -703,6 +762,8 @@
                         </div>
                     </div>
 
+                    <!-- This redundant "Direct Contact" section is removed to differentiate from Bedding page -->
+                    <!-- 
                     <div class="text-center my-16">
                         <h3 class="text-3xl text-black mb-8">Direct Contact</h3>
                          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -720,14 +781,15 @@
                              </a>
                          </div>
                     </div>
+                    -->
                     
-                    <section class="py-20 bg-gray-50">
+                    <section class="py-20 bg-white">
                         <div class="container mx-auto px-6 max-w-3xl">
                             <div class="text-center mb-12">
                                 <h2 class="text-4xl text-black">Interested in Our Seating?</h2>
                                 <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Let us know what you're looking for, and we'll help you find the perfect piece.</p>
                             </div>
-                            <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100">
+                            <div class="bg-white p-8 sm:p-10 rounded-lg shadow-2xl border border-gray-100 contact-form-wrapper">
                                 <div class="space-y-5">
                                     <div>
                                         <label for="name-seating" class="block text-gray-800 font-semibold mb-2">Name:</label>
@@ -812,6 +874,21 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Preloader ---
+            // Moved window.onload to top-level for earlier execution
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                if (preloader) {
+                    preloader.classList.add('hidden');
+                }
+            });
+            // Fallback to hide preloader after 2s if window.load fails
+            setTimeout(() => {
+                if (preloader && !preloader.classList.contains('hidden')) {
+                    preloader.classList.add('hidden');
+                }
+            }, 2500);
 
             const pageData = {
                 'curtains-page': {
@@ -949,6 +1026,34 @@
                     }
                 });
             }
+
+            // --- Scroll Animations ---
+            const animatedElements = document.querySelectorAll('.feature-card, .product-grid-card, .scroller-wrapper, .why-choose-item, .contact-form-wrapper, .map-container, .map-text');
+            
+            animatedElements.forEach(el => el.classList.add('animate-on-scroll'));
+
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // Run animation only once
+                        }
+                    });
+                }, {
+                    threshold: 0.1 // Trigger when 10% visible, good for mobile
+                });
+
+                animatedElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Fallback for older browsers: just show all elements
+                animatedElements.forEach(el => {
+                    el.classList.add('is-visible');
+                });
+            }
+
 
             document.querySelectorAll('.scroller-wrapper').forEach(wrapper => {
                 initializeScroller(wrapper);
@@ -1106,4 +1211,3 @@
     </script>
 </body>
 </html>
-
