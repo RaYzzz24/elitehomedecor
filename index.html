@@ -48,10 +48,10 @@
             position: relative;
             background-color: #f3f4f6;
             border-radius: 0.5rem;
-            cursor: grab; /* Added for interaction hint */
+            cursor: grab;
         }
         .scroller-viewport:active {
-            cursor: grabbing; /* Added for interaction hint */
+            cursor: grabbing;
         }
         .scroller-gallery {
             height: 100%;
@@ -160,14 +160,14 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .product-grid-card:hover img { /* <-- ADDED THIS BLOCK */
+        .product-grid-card:hover img {
             transform: scale(1.05);
         }
         .product-grid-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            transition: transform 0.3s ease; /* <-- ADDED THIS LINE */
+            transition: transform 0.3s ease;
         }
         .product-grid-card-name {
             font-family: 'Montserrat', sans-serif;
@@ -176,8 +176,6 @@
             padding: 1rem;
             text-align: center;
         }
-
-        /* --- NEW Seating Card Style --- */
         .seating-product-card {
             background-color: white;
             border-radius: 0.5rem;
@@ -185,20 +183,20 @@
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            border: 1px solid #e5e7eb; /* Add a subtle border */
+            border: 1px solid #e5e7eb;
         }
         .seating-product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .seating-product-card:hover img { /* <-- ADDED THIS BLOCK */
+        .seating-product-card:hover img {
             transform: scale(1.05);
         }
         .seating-product-card img {
             width: 100%;
-            height: 280px; /* Taller image */
-            object-fit: cover; /* Keep cover, but taller */
-            transition: transform 0.3s ease; /* <-- ADDED THIS LINE */
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
         .seating-product-card-name {
             font-family: 'Montserrat', sans-serif;
@@ -207,8 +205,6 @@
             padding: 1rem;
             text-align: center;
         }
-        /* --- End of NEW Seating Card Style --- */
-
         .feature-card-img {
             width: 100%;
             height: 180px;
@@ -305,13 +301,11 @@
          #image-lightbox-close:hover {
             transform: scale(1.1);
          }
-    
-    /* --- Preloader / Buffer --- */
     #preloader {
         position: fixed;
         inset: 0;
         background-color: white;
-        z-index: 10000; /* Highest z-index */
+        z-index: 10000;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -324,8 +318,8 @@
     .spinner {
         width: 50px;
         height: 50px;
-        border: 5px solid #f3f4f6; /* Light gray */
-        border-top: 5px solid #DC2626; /* Red */
+        border: 5px solid #f3f4f6;
+        border-top: 5px solid #DC2626;
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
@@ -333,13 +327,10 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-
-    /* --- Page & Scroll Animations --- */
     @keyframes pageFadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
     }
-    /* --- NEW ANIMATIONS --- */
     @keyframes pageSlideInFromRight {
         from { opacity: 0; transform: translateX(30px); }
         to { opacity: 1; transform: translateX(0); }
@@ -371,9 +362,6 @@
     .animate-page-fade-up {
         animation: pageFadeUp 0.5s ease-out;
     }
-    /* --- End of NEW Animations --- */
-
-    /* Class for elements to animate on scroll */
     .animate-on-scroll {
         opacity: 0;
         transform: translateY(20px);
@@ -387,13 +375,9 @@
     </style>
 </head>
 <body class="text-gray-800">
-    <!-- IMAGE PATHS: All image 'src' and 'url()' paths assume they are inside a folder named 'images/' -->
-
-    <!-- Preloader / Buffer -->
     <div id="preloader">
         <div class="spinner"></div>
     </div>
-
     <header class="bg-white sticky top-0 z-40">
         <div class="menu-container">
             <div class="container mx-auto px-2 sm:px-4 flex justify-between items-center">
@@ -402,11 +386,9 @@
                         <img src="images/logo.png" alt="Elite Home Decor Logo" class="h-12 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/120x50/000000/FFFFFF?text=ELITE';">
                     </a>
                 </div>
-    
                 <div class="flex-grow text-center px-2">
                      <h1 class="text-base sm:text-xl md:text-2xl text-black font-bold tracking-wider">ELITE HOME DECOR</h1>
                 </div>
-                
                 <div class="flex-shrink-0">
                     <nav class="hidden md:flex items-center space-x-8" aria-label="Main Navigation">
                         <a href="#home-page" class="nav-link">Home</a>
@@ -426,7 +408,6 @@
             </div>
         </div>
     </header>
-
     <div id="mobile-menu" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0" style="transition: opacity 0.3s ease-in-out;">
         <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
             <div class="p-6">
@@ -448,8 +429,6 @@
             </div>
         </div>
     </div>
-
-    <!-- This "main" tag is now correctly placed *after* the header and mobile menu sections -->
     <main>
         <section id="page-hero" class="relative min-h-[300px] bg-cover bg-center flex items-center justify-center text-white hidden" style="background-image: url('https://images.unsplash.com/photo-1533757875211-3715b0f92614?q=80&w=2070&auto=format&fit=crop');">
             <div class="absolute inset-0 bg-black opacity-60"></div>
@@ -458,9 +437,7 @@
                 <p id="page-hero-subtitle" class="text-lg md:text-xl max-w-2xl mx-auto"></p>
             </div>
         </section>
-
         <div id="home-page" class="page">
-            
             <section class="relative h-[70vh] min-h-[450px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('images/home.jpg');">
                 <div class="absolute inset-0 bg-black opacity-50"></div>
                 <div class="relative z-10 text-center p-6">
@@ -469,7 +446,6 @@
                     <a href="#curtains-page" class="nav-link-cta bg-red-600 text-white py-3 px-8 rounded-full hover:bg-red-700 transition-all duration-300 font-semibold text-lg transform hover:scale-105">Explore Our Curtains</a>
                 </div>
             </section>
-            
             <section id="about" class="py-20 bg-white">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-16">
@@ -516,7 +492,6 @@
                     </div>
                 </div>
             </section>
-
             <section class="py-20 bg-gray-50">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12">
@@ -548,7 +523,6 @@
                     </div>
                 </div>
             </section>
-            
             <section class="py-20 bg-white">
                  <div class="container mx-auto px-6 max-w-3xl">
                        <div class="text-center mb-12">
@@ -619,11 +593,9 @@
                  </div>
              </section>
         </div>
-
         <div id="curtains-page" class="page hidden">
              <section class="py-20 bg-white">
                  <div class="container mx-auto px-6">
-                       
                        <div class="my-16">
                            <div class="text-center mb-12">
                                <h3 class="text-3xl text-black">Main Curtain Collection</h3>
@@ -648,7 +620,6 @@
                                    </button>
                                </div>
                                <div class="scroller-pagination flex justify-center space-x-2 mt-4"></div>
-                               <!-- NEW Details Section -->
                                <div class="text-center text-gray-600 mt-6 max-w-xl mx-auto">
                                    <p>We have all door and window curtains, in all 7, 8, and 10 feet sizes, with your choice of fabric.</p>
                                </div>
@@ -678,7 +649,6 @@
                                    </button>
                                </div>
                                <div class="scroller-pagination flex justify-center space-x-2 mt-4"></div>
-                               <!-- NEW Details Section -->
                                <div class="text-center text-gray-600 mt-6 max-w-xl mx-auto">
                                    <p>We have all door and window curtains, in all 7, 8, and 10 feet sizes, with your choice of fabric.</p>
                                </div>
@@ -712,11 +682,9 @@
                  </div>
              </section>
         </div>
-
         <div id="bedding-page" class="page hidden">
             <section class="py-20 bg-white"> 
                 <div class="container mx-auto px-6">
-
                     <div class="my-16">
                         <div class="text-center mb-12">
                            <h3 class="text-3xl text-black">Mattresses & Pillows</h3>
@@ -741,7 +709,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="my-16">
                         <div class="text-center mb-12">
                             <h3 class="text-3xl text-black">Bedsheets & Covers</h3>
@@ -766,7 +733,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
             <section class="py-20 bg-gray-50">
@@ -795,11 +761,9 @@
                 </div>
             </section>
         </div>
-
         <div id="seating-page" class="page hidden">
             <section class="py-20 bg-gray-50"> 
                 <div class="container mx-auto px-6">
-
                     <div class="my-16">
                         <div class="text-center mb-12">
                             <h3 class="text-3xl text-black">Comfortable Seating</h3>
@@ -840,7 +804,6 @@
                             </div>
                         </div>
                     </div>
-    
                     <section class="py-20 bg-white">
                         <div class="container mx-auto px-6 max-w-3xl">
                             <div class="text-center mb-12">
@@ -862,7 +825,6 @@
                                         <textarea id="message-seating" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition" placeholder="e.g., I'm interested in the L-Shape Sofa..."></textarea>
                                     </div>
                                     <button type="button" id="submit-whatsapp-seating" class="w-full bg-red-600 text-white py-4 rounded-lg hover:bg-black transition-colors font-bold text-lg shadow-md hover:shadow-lg">Send via WhatsApp</button>
-
                                 </div>
                             </div>
                         </div>
@@ -870,9 +832,7 @@
                 </div>
             </section>
         </div>
-
     </main>
-
     <footer class="bg-black text-white py-16">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -913,7 +873,6 @@
             </div>
         </div>
     </footer>
-
     <div id="custom-alert-overlay" class="hidden">
         <div id="custom-alert-content">
             <p id="custom-alert-text" class="text-lg text-gray-800 mb-6">This is a message.</p>
@@ -922,32 +881,25 @@
             </button>
         </div>
     </div>
-
     <div id="image-lightbox-overlay" class="hidden">
         <div id="image-lightbox-content">
             <button id="image-lightbox-close" title="Close">&times;</button>
             <img id="lightbox-image" src="images/https://placehold.co/800x600/f3f4f6/DC2626?text=Product+Image" alt="Product Image Lightbox">
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
-            // --- Preloader ---
-            // Moved window.onload to top-level for earlier execution
             const preloader = document.getElementById('preloader');
             window.addEventListener('load', () => {
                 if (preloader) {
                     preloader.classList.add('hidden');
                 }
             });
-            // Fallback to hide preloader after 2s if window.load fails
             setTimeout(() => {
                 if (preloader && !preloader.classList.contains('hidden')) {
                     preloader.classList.add('hidden');
                 }
             }, 2500);
-
             const pageData = {
                 'curtains-page': {
                     title: "Our Customized Curtains",
@@ -965,32 +917,21 @@
                     imageUrl: "mainsof.jpg?q=80&w=2070&auto=format&fit=crop"
                 }
             };
-
             const pages = document.querySelectorAll('.page');
             const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .nav-link-cta, .nav-link-logo, .nav-link-footer, .locate-link');
             const desktopNavLinks = document.querySelectorAll('nav .nav-link');
-            
             const pageHero = document.getElementById('page-hero');
             const pageHeroTitle = document.getElementById('page-hero-title');
             const pageHeroSubtitle = document.getElementById('page-hero-subtitle');
-
             function showPage(pageId) {
                 const cleanPageId = pageId.startsWith('#') ? pageId.substring(1) : pageId;
-
                 pages.forEach(page => {
-                    // Remove all potential animation classes first
                     page.classList.remove('animate-page-fade-in', 'animate-page-slide-right', 'animate-page-slide-left', 'animate-page-zoom-in');
-
                     if (page.id !== cleanPageId) {
                         page.classList.add('hidden');
                     } else {
-                        // This is the page we want to show
                         page.classList.remove('hidden');
-
-                        // Force browser reflow to re-trigger animation
                         void page.offsetWidth; 
-
-                        // Add the *specific* animation based on page ID
                         if (cleanPageId === 'home-page') {
                             page.classList.add('animate-page-fade-in');
                         } else if (cleanPageId === 'curtains-page') {
@@ -1000,16 +941,13 @@
                         } else if (cleanPageId === 'seating-page') {
                             page.classList.add('animate-page-zoom-in');
                         } else {
-                            // Fallback for any other page
                             page.classList.add('animate-page-fade-in');
                         }
                     }
                 });
-                
                 if (cleanPageId !== 'home-page' || !document.getElementById('locate-us')) {
                     window.scrollTo(0, 0);
                 }
-
                 if (cleanPageId === 'home-page') {
                     if(pageHero) pageHero.classList.add('hidden');
                 } else if (pageData[cleanPageId] && pageHero) {
@@ -1017,17 +955,13 @@
                     pageHeroTitle.textContent = data.title;
                     pageHeroSubtitle.textContent = data.subtitle;
                     pageHero.style.backgroundImage = `url('images/${data.imageUrl}')`;
-                    
-                    // Animate the hero section as well
                     pageHero.classList.remove('animate-page-fade-up');
-                    void pageHero.offsetWidth; // Re-trigger reflow
+                    void pageHero.offsetWidth;
                     pageHero.classList.add('animate-page-fade-up');
-                    
                     pageHero.classList.remove('hidden');
                 } else {
                     if(pageHero) pageHero.classList.add('hidden');
                 }
-
                 desktopNavLinks.forEach(link => {
                     let linkHref = link.getAttribute('href');
                     if (linkHref === '#locate-us' && cleanPageId === 'home-page') {
@@ -1039,17 +973,14 @@
                         link.classList.remove('active');
                     }
                 });
-
                 if (window.location.hash !== `#${cleanPageId}` && cleanPageId !== 'locate-us') {
                      window.location.hash = `#${cleanPageId}`;
                 }
             }
-
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const pageId = link.getAttribute('href');
-
                     if (pageId === '#locate-us') {
                         showPage('#home-page');
                         setTimeout(() => {
@@ -1058,7 +989,6 @@
                                 locateSection.scrollIntoView({ behavior: 'smooth' });
                             }
                         }, 100); 
-
                         if (link.classList.contains('mobile-nav-link')) {
                             closeMobileMenu();
                         }
@@ -1072,20 +1002,15 @@
                     }
                 });
             });
-
             const initialPageId = window.location.hash || '#home-page';
             showPage(initialPageId);
-            
             window.addEventListener('hashchange', () => {
                  showPage(window.location.hash || '#home-page');
             });
-
-
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const closeMenuButton = document.getElementById('close-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-
             function openMobileMenu() {
                 if (!mobileMenu || !mobileMenuPanel) return;
                 mobileMenu.classList.remove('hidden');
@@ -1095,7 +1020,6 @@
                     mobileMenuPanel.classList.remove('translate-x-full');
                 }, 10);
             }
-
             function closeMobileMenu() {
                 if (!mobileMenu || !mobileMenuPanel) return;
                 mobileMenu.classList.add('opacity-0');
@@ -1105,7 +1029,6 @@
                     mobileMenu.classList.add('hidden');
                 }, 300);
             }
-
             if (mobileMenuButton) mobileMenuButton.addEventListener('click', openMobileMenu);
             if (closeMenuButton) closeMenuButton.addEventListener('click', closeMobileMenu);
             if (mobileMenu) {
@@ -1115,83 +1038,64 @@
                     }
                 });
             }
-
-            // --- Scroll Animations ---
             const animatedElements = document.querySelectorAll('.feature-card, .product-grid-card, .scroller-wrapper, .why-choose-item, .contact-form-wrapper, .map-container, .map-text');
-            
             animatedElements.forEach(el => el.classList.add('animate-on-scroll'));
-
             if ("IntersectionObserver" in window) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
-                            observer.unobserve(entry.target); // Run animation only once
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, {
-                    threshold: 0.1 // Trigger when 10% visible, good for mobile
+                    threshold: 0.1
                 });
-
                 animatedElements.forEach(el => {
                     observer.observe(el);
                 });
             } else {
-                // Fallback for older browsers: just show all elements
                 animatedElements.forEach(el => {
                     el.classList.add('is-visible');
                 });
             }
-
-
             document.querySelectorAll('.scroller-wrapper').forEach(wrapper => {
                 initializeScroller(wrapper);
             });
-
             function initializeScroller(wrapper) {
                 const gallery = wrapper.querySelector('.scroller-gallery');
-                const viewport = wrapper.querySelector('.scroller-viewport'); /* Added viewport selector */
+                const viewport = wrapper.querySelector('.scroller-viewport');
                 const prevBtn = wrapper.querySelector('.scroller-btn-prev');
                 const nextBtn = wrapper.querySelector('.scroller-btn-next');
                 const paginationContainer = wrapper.querySelector('.scroller-pagination');
-
-                if (!gallery || !viewport) return; /* Updated check */
-
+                if (!gallery || !viewport) return;
                 const images = gallery.querySelectorAll('img');
                 const totalImages = images.length;
                 let currentIndex = 0;
                 let paginationDots = [];
-
-                // --- NEW Swipe Logic ---
                 let startX = 0;
                 let isSwiping = false;
-
                 viewport.addEventListener('touchstart', (e) => {
                     startX = e.touches[0].clientX;
                     isSwiping = true;
                 }, { passive: true });
-
                 viewport.addEventListener('touchend', (e) => {
                     if (!isSwiping) return;
                     isSwiping = false;
                     const endX = e.changedTouches[0].clientX;
                     const diffX = endX - startX;
-
-                    if (diffX < -40) { // Swiped left (threshold 40px)
+                    if (diffX < -40) {
                         goToSlide(currentIndex + 1);
-                    } else if (diffX > 40) { // Swiped right (threshold 40px)
+                    } else if (diffX > 40) {
                         goToSlide(currentIndex - 1);
                     }
                 });
-                // --- End NEW Swipe Logic ---
-
                 if (totalImages <= 1) {
                     if (prevBtn) prevBtn.style.display = 'none';
                     if (nextBtn) nextBtn.style.display = 'none';
                     if (paginationContainer) paginationContainer.style.display = 'none';
                     return;
                 }
-
                 if (paginationContainer) {
                     for (let i = 0; i < totalImages; i++) {
                         const dot = document.createElement('div');
@@ -1202,7 +1106,6 @@
                         paginationDots.push(dot);
                     }
                 }
-
                 function updateGallery() {
                     gallery.style.transform = `translateX(-${currentIndex * 100}%)`;
                     if (paginationContainer) {
@@ -1211,26 +1114,20 @@
                         });
                     }
                 }
-
                 function goToSlide(index) {
                     currentIndex = (index + totalImages) % totalImages;
                     updateGallery();
                 }
-
                 if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
                 if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-
                 updateGallery();
             }
-
             const copyrightYear = document.getElementById('current-year');
             if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
-            
             const lightboxOverlay = document.getElementById('image-lightbox-overlay');
             const lightboxImage = document.getElementById('lightbox-image');
             const lightboxClose = document.getElementById('image-lightbox-close');
-
-            document.querySelectorAll('.product-grid-card, .seating-product-card').forEach(card => { /* <-- MODIFIED THIS LINE */
+            document.querySelectorAll('.product-grid-card, .seating-product-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const imgElement = card.querySelector('img');
                     if (imgElement && lightboxOverlay && lightboxImage) {
@@ -1242,7 +1139,6 @@
                     }
                 });
             });
-
             function closeLightbox() {
                  if (lightboxOverlay) {
                     lightboxOverlay.classList.remove('visible');
@@ -1252,7 +1148,6 @@
                     }, 300);
                  }
             }
-
             if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
             if (lightboxOverlay) {
                 lightboxOverlay.addEventListener('click', (e) => {
@@ -1261,13 +1156,10 @@
                     }
                 });
             }
-
             const yourWhatsAppNumber = '919880755002';
-
             const customAlert = document.getElementById('custom-alert-overlay');
             const alertMessage = document.getElementById('custom-alert-text');
             const closeAlertButton = document.getElementById('custom-alert-close');
-
             function showAlert(message) {
                 if (!customAlert || !alertMessage) {
                     console.error("Custom alert modal not found. Using default alert.");
@@ -1278,7 +1170,6 @@
                 customAlert.classList.remove('hidden');
                 customAlert.classList.add('visible');
             }
-
             if (closeAlertButton) {
                 closeAlertButton.addEventListener('click', () => {
                     customAlert.classList.remove('visible');
@@ -1287,35 +1178,28 @@
                     }, 300);
                 });
             }
-
             function handleWhatsAppSubmit(buttonId, nameId, phoneId, interestedId, messageId) {
                 const submitButton = document.getElementById(buttonId);
                 if (!submitButton) return;
-
                 submitButton.addEventListener('click', () => {
                     const nameInput = document.getElementById(nameId);
                     const phoneInput = document.getElementById(phoneId);
                     const interestedInput = interestedId ? document.getElementById(interestedId) : null;
                     const messageInput = document.getElementById(messageId);
-
                     const name = nameInput ? nameInput.value.trim() : '';
                     const phone = phoneInput ? phoneInput.value.trim() : '';
                     const interested = interestedInput ? interestedInput.value : '';
                     const message = messageInput ? messageInput.value.trim() : '';
-
                     if (!name) return showAlert('Please enter your name.');
                     if (!phone) return showAlert('Please enter your phone number.');
                     if (!message) return showAlert('Please enter a message.');
-
                     let waMessage = `Hello Elite Home Decor,\n\n*Name:* ${name}\n*Phone:* ${phone}`;
                     if (interested) waMessage += `\n*Interested In:* ${interested}`;
                     waMessage += `\n*Message:* ${message}`;
-
                     const waUrl = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(waMessage)}`;
                     window.open(waUrl, '_blank');
                 });
             }
-
             handleWhatsAppSubmit('submit-whatsapp-home', 'name-home', 'phone-home', 'interested-home', 'message-home');
             handleWhatsAppSubmit('submit-whatsapp-curtains', 'name-curtains', 'phone-curtains', null, 'message-curtains');
             handleWhatsAppSubmit('submit-whatsapp-bedding', 'name-bedding', 'phone-bedding', null, 'message-bedding');
@@ -1324,5 +1208,3 @@
     </script>
 </body>
 </html>
-
-
